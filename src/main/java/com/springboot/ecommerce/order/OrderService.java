@@ -2,7 +2,6 @@ package com.springboot.ecommerce.order;
 
 import com.springboot.ecommerce.dto.OrderDto;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -17,41 +16,27 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
-    public List<Order> getAllOrders() {
-        return orderRepository.findAll();
-    }
-
     private List<Order> findByOrderDate(LocalDate orderDate) {
         return orderRepository.findByOrderDate(orderDate);
     }
 
-    private List<Order> findByOrderDateBetween(LocalDate startDate, LocalDate endDate) {
-        return orderRepository.findByOrderDateBetween(startDate, endDate);
-    }
+    // Designed this function in this way so that we can reuse this block to get total sale amount of any day
+    public OrderDto getTotalSaleAmountForSpecificDay(LocalDate date) {
 
-    public OrderDto getTotalSaleAmountForCurrentDay() {
-
-        LocalDate currentDate = LocalDate.now();
-        List<Order> ordersForCurrentDay = findByOrderDate(currentDate);
+        List<Order> ordersForCurrentDay = findByOrderDate(date);
         BigDecimal totalSaleAmount = ordersForCurrentDay.stream()
                 .map(Order::getTotalAmount)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        return new OrderDto(currentDate, totalSaleAmount);
+        return new OrderDto(date, totalSaleAmount);
+    }
+
+    // We can do the same thing by a jpa custom query, it is not used but kept it anyway
+    public OrderDto getTotalSaleAmountForSpecificDayInSql(LocalDate date) {
+        return orderRepository.getTotalSaleAmountForSpecificDayInSql(date);
     }
 
     public OrderDto getMaxSellDayInRange(LocalDate startDate, LocalDate endDate) {
-
-        List<Order> ordersInRange = findByOrderDateBetween(startDate, endDate);
-        LocalDate maxSaleDate = ordersInRange.stream()
-                .map(Order::getOrderDate)
-                .max(LocalDate::compareTo)
-                .orElse(null);
-        BigDecimal maxSaleAmount = ordersInRange.stream()
-                .filter(order -> order.getOrderDate().equals(maxSaleDate))
-                .map(Order::getTotalAmount)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-
-        return new OrderDto(maxSaleDate, maxSaleAmount);
+        return orderRepository.getMaxSellDayInRange(startDate, endDate);
     }
 }

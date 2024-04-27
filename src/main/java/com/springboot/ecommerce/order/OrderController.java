@@ -6,9 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -22,14 +20,14 @@ class OrderController {
 
     @GetMapping("/total-sales-today")
     public OrderDto getTotalSaleAmountForCurrentDay() {
-        return orderService.getTotalSaleAmountForCurrentDay();
+        return orderService.getTotalSaleAmountForSpecificDay(LocalDate.now());
     }
 
     @GetMapping("/max-sale-day")
     public OrderDto getMaxSaleDayInRange(
             @RequestParam LocalDate startDate,
-            @RequestParam LocalDate endDate
-    ) {
+            @RequestParam LocalDate endDate) {
+
         return orderService.getMaxSellDayInRange(startDate, endDate);
     }
 

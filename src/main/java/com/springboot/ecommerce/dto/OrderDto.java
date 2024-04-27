@@ -9,6 +9,6 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 public class OrderDto {
-    private LocalDate maxSaleDate;
-    private BigDecimal maxSaleAmount;
+    private LocalDate date;
+    private BigDecimal amount;
 }
