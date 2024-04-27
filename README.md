@@ -49,11 +49,12 @@ To get a local copy of the project up and running, follow these steps:
    sudo -u postgres createuser --pwprompt dynamic
    ```
 
-4. Create a database named 'springsecurity' and give permissions to the user 'dynamic'
+4. Create a database named 'ecommerce' and give permissions to the user 'dynamic'
 
    ```sh
    sudo -u postgres createdb -O dynamic ecommerce
    sudo -u postgres psql -c 'GRANT ALL ON DATABASE ecommerce TO dynamic;'
+   psql -U dynamic -h localhost -d ecommerce -f db_prepare.sql
    ```
 
 5. Build the project and Run the application
