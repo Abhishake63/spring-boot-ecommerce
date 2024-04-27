@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
-public class MaxSaleDayResponse {
+public class OrderDto {
     private LocalDate maxSaleDate;
     private BigDecimal maxSaleAmount;
 }
