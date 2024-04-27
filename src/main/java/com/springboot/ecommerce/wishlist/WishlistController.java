@@ -1,6 +1,8 @@
 package com.springboot.ecommerce.wishlist;
 
 import com.springboot.ecommerce.product.Product;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,7 @@ import java.util.List;
 @RequestMapping("/api/wishlist")
 class WishlistController {
 
+    private static final Logger logger = LoggerFactory.getLogger(WishlistController.class);
     private WishlistService wishlistService;
 
     WishlistController(WishlistService wishlistService) {
@@ -20,6 +23,7 @@ class WishlistController {
 
     @GetMapping("/{customerId}")
     public List<Product> getWishlistForCustomer(@PathVariable Long customerId) {
+        logger.info("Call getWishlistForCustomer");
         return wishlistService.getWishlistForCustomer(customerId);
     }
 }
