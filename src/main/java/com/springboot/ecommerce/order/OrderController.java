@@ -21,7 +21,7 @@ class OrderController {
         this.orderService = orderService;
     }
 
-    @GetMapping("/total-sales-today")
+    @GetMapping("/current-day")
     public OrderDto getTotalSaleAmountForCurrentDay() {
         logger.info("Call getTotalSaleAmountForCurrentDay");
         return orderService.getTotalSaleAmountForSpecificDay(LocalDate.now());

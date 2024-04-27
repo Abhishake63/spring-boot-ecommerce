@@ -21,7 +21,7 @@ class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/top-selling")
+    @GetMapping("/top-selling/all-time")
     public List<ProductDto> getTopSellingProductsOfAllTime(@RequestParam int limit) {
         logger.info("Call getTopSellingProductsOfAllTime");
         return productService.getTopSellingProductsOfAllTime(limit);
