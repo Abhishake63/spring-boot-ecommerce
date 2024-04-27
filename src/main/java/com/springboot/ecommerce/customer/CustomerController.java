@@ -19,6 +19,11 @@ class CustomerController {
         return customerService.getCustomers();
     }
 
+    @GetMapping("/{id}")
+    public Customer getCustomer(@PathVariable Long id) {
+        return customerService.getCustomer(id);
+    }
+
     @PostMapping("/")
     public Customer createCustomer(@RequestBody Customer customer) {
         return customerService.saveCustomer(customer);
