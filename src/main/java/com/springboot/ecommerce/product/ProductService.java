@@ -23,7 +23,7 @@ class ProductService {
     }
 
     public List<ProductDto> getTopSellingProductsOfAllTime(int limit) {
-        return orderItemRepository.findTopSellingProductsOfAllTime(limit);
+        return orderItemRepository.findTopSellingProductsOfAllTimeBasedOnSaleAmount(limit);
     }
 
     public List<ProductDto> getTopSellingProductsOfLastMonth(int limit) {
@@ -31,6 +31,6 @@ class ProductService {
         LocalDate startOfLastMonth = lastMonth.withDayOfMonth(1);
         LocalDate endOfLastMonth = lastMonth.withDayOfMonth(lastMonth.lengthOfMonth());
 
-        return orderItemRepository.findTopSellingProductsOfLastMonth(limit, startOfLastMonth, endOfLastMonth);
+        return orderItemRepository.findTopSellingProductsOfLastMonthBasedOnNumberOfSales(limit, startOfLastMonth, endOfLastMonth);
     }
 }

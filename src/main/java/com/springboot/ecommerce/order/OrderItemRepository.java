@@ -17,7 +17,7 @@ public interface OrderItemRepository extends JpaRepository<OrderItem, Long> {
             + "GROUP BY p.id "
             + "ORDER BY SUM(oi.quantity * oi.price) DESC "
             + "LIMIT :limit")
-    List<ProductDto> findTopSellingProductsOfAllTime(@Param("limit") int limit);
+    List<ProductDto> findTopSellingProductsOfAllTimeBasedOnSaleAmount(@Param("limit") int limit);
 
     @Query("SELECT NEW com.springboot.ecommerce.dto.ProductDto(p.id, p.name, p.description, p.price, p.stockQuantity, SUM(oi.quantity * oi.price), SUM(oi.quantity)) "
             + "FROM OrderItem oi "
@@ -27,7 +27,7 @@ public interface OrderItemRepository extends JpaRepository<OrderItem, Long> {
             + "GROUP BY p.id "
             + "ORDER BY SUM(oi.quantity) DESC "
             + "LIMIT :limit")
-    List<ProductDto> findTopSellingProductsOfLastMonth(@Param("limit") int limit,
-                                                        @Param("startDate") LocalDate startDate,
-                                                        @Param("endDate") LocalDate endDate);
+    List<ProductDto> findTopSellingProductsOfLastMonthBasedOnNumberOfSales(@Param("limit") int limit,
+                                                                           @Param("startDate") LocalDate startDate,
+                                                                           @Param("endDate") LocalDate endDate);
 }
