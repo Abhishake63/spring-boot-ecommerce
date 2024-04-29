@@ -1,7 +1,7 @@
 package com.springboot.ecommerce.product;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.springboot.ecommerce.order.OrderItem;
+import com.springboot.ecommerce.orderitem.OrderItem;
 import com.springboot.ecommerce.wishlist.Wishlist;
 import jakarta.persistence.*;
 import lombok.*;

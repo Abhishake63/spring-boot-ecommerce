@@ -1,7 +1,7 @@
 package com.springboot.ecommerce.product;
 
 import com.springboot.ecommerce.dto.ProductDto;
-import com.springboot.ecommerce.order.OrderItemRepository;
+import com.springboot.ecommerce.orderitem.OrderItemRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

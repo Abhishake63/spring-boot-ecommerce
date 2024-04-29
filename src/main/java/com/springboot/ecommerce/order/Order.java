@@ -1,6 +1,7 @@
 package com.springboot.ecommerce.order;
 
 import com.springboot.ecommerce.customer.Customer;
+import com.springboot.ecommerce.orderitem.OrderItem;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

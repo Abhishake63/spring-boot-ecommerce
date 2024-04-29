@@ -1,4 +1,4 @@
-package com.springboot.ecommerce.order;
+package com.springboot.ecommerce.orderitem;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
