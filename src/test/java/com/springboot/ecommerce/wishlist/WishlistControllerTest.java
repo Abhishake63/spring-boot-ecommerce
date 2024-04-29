@@ -1,39 +1,47 @@
 package com.springboot.ecommerce.wishlist;
 
+import com.springboot.ecommerce.product.Product;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ExtendWith(MockitoExtension.class)
 class WishlistControllerTest {
 
-    @LocalServerPort
-    private int port;
+    @Mock
+    private WishlistService wishlistService;
 
-    @Autowired
-    private TestRestTemplate restTemplate;
+    @InjectMocks
+    private WishlistController wishlistController;
 
-    private String baseUrl;
+    private List<Product> products;
 
     @BeforeEach
     void setUp() {
-        baseUrl = "http://localhost:" + port + "/api/wishlist";
+
+        products = new ArrayList<>();
+        Product product1 = new Product(1L, "Sample Product 1", "This is a sample product", new BigDecimal("99.99"), 100);
+        Product product2 = new Product(2L, "Sample Product 2", "This is a sample product", new BigDecimal("99.99"), 100);
+        products.add(product1);
+        products.add(product2);
     }
 
     @Test
     void getWishlistForCustomer() {
-        int customerId = 1;
-        ResponseEntity<List> response = restTemplate.getForEntity(baseUrl + "/" + customerId, List.class);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        // Add assertions for the expected wishlist items
+
+        Long customerId = 1L;
+        when(wishlistService.getWishlistForCustomer(customerId)).thenReturn(products);
+        List<Product> result = wishlistController.getWishlistForCustomer(customerId);
+        assertEquals(products.size(), result.size());
     }
 }

@@ -34,5 +34,4 @@ class OrderController {
         logger.info("Call getMaxSaleDayInRange");
         return orderService.getMaxSellDayInRange(startDate, endDate);
     }
-
 }
