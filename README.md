@@ -26,7 +26,6 @@ Before you begin, ensure you have met the following requirements:
 
 - Java Development Kit (JDK) installed (version 17 or higher)
 - Maven build tool installed
-- PostgreSQL installed
 
 ## Getting Started
 
@@ -55,7 +54,7 @@ To get a local copy of the project up and running, follow these steps:
    ```sh
    sudo -u postgres createdb -O dynamic ecommerce
    sudo -u postgres psql -c 'GRANT ALL ON DATABASE ecommerce TO dynamic;'
-   psql -U dynamic -h localhost -d ecommerce -f db_prepare.sql
+   psql -U dynamic -h localhost -d ecommerce -f schema.sql
    ```
 
 5. Build the project and Run the application
@@ -66,22 +65,16 @@ To get a local copy of the project up and running, follow these steps:
 
 ## Build with Docker
 
-### Build the WAR file
+### Run Postgres Container
 
 ```bash
-mvn clean package
+docker compose up
 ```
 
-### Build the Docker image
+### Run Project from Intellij or Terminal
 
 ```bash
-docker build -t ecommerce .
-```
-
-### Run the Docker container
-
-```bash
-docker run -d -p 8080:8080 ecommerce:latest
+mvn clean spring-boot:run
 ```
 
 ### Check Container Logs
