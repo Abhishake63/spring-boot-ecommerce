@@ -35,13 +35,13 @@ class CustomerControllerTest {
         customers = Collections.singletonList(customer);
     }
 
-    @Test
-    void getCustomers() {
-
-        when(customerService.getCustomers()).thenReturn(customers);
-        List<Customer> result = customerController.getCustomers();
-        assertEquals(customers.size(), result.size());
-    }
+//    @Test
+//    void getCustomers() {
+//
+//        when(customerService.getCustomers()).thenReturn(customers);
+//        List<Customer> result = customerController.getCustomers();
+//        assertEquals(customers.size(), result.size());
+//    }
 
     @Test
     void getCustomer() {

@@ -1,5 +1,6 @@
 package com.springboot.ecommerce.customer;
 
+import com.springboot.ecommerce.DisabledApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ class CustomerController {
         this.customerService = customerService;
     }
 
+    @DisabledApi
     @GetMapping("/")
     public List<Customer> getCustomers() {
         logger.info("Call getCustomers");
